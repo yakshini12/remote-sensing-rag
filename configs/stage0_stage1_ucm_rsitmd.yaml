@@ -3,9 +3,19 @@
 # Purpose: deterministic manifests + leakage audit for
 # UCM-Captions (caption dataset) + RSITMD (knowledge-base captions).
 #
-# Design decision:
-# - Paths are relative to the project root unless absolute.
-# - Seeds / hash algorithms are fixed for reproducibility.
+# Portable defaults only. Do not put a Mac home-directory path here.
+# Override on Colab / another machine with env vars or CLI flags:
+#   RSRAG_UCM_ROOT
+#   RSRAG_RSITMD_ROOT
+#   RSRAG_PROCESSED_DIR
+#   RSRAG_REPORT_DIR
+#   RSRAG_PROJECT_ROOT
+#
+# Example (Google Drive on Colab):
+#   export RSRAG_UCM_ROOT=/content/drive/MyDrive/rsrag-data/ucm_captions
+#   export RSRAG_RSITMD_ROOT=/content/drive/MyDrive/rsrag-data/rsitmd
+#   export RSRAG_PROCESSED_DIR=/content/drive/MyDrive/rsrag-artifacts/processed
+#   export RSRAG_REPORT_DIR=/content/drive/MyDrive/rsrag-artifacts/reports
 
 project_name: remote-sensing-rag
 stage: stage0_stage1

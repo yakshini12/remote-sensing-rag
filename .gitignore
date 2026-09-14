@@ -9,6 +9,7 @@ build/
 venv/
 .env
 .pytest_cache/
+configs/local.yaml
 
 # Data and large artifacts (keep manifests/reports tracked selectively)
 data/raw/**

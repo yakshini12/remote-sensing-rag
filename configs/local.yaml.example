@@ -1,0 +1,8 @@
+# Machine-specific overlay. Copy to configs/local.yaml (gitignored).
+# Use this on a laptop or Colab instead of editing committed YAML.
+
+paths:
+  ucm_root: /content/drive/MyDrive/rsrag-data/ucm_captions
+  rsitmd_root: /content/drive/MyDrive/rsrag-data/rsitmd
+  processed_dir: /content/drive/MyDrive/rsrag-artifacts/processed
+  report_dir: /content/drive/MyDrive/rsrag-artifacts/reports

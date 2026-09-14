@@ -16,9 +16,13 @@ from rsrag.data.splits import apply_splits, load_official_ucm_splits, split_coun
 from rsrag.data.ucm import load_ucm_captions
 
 
-def run_stage0_stage1(config_path: str | Path) -> dict[str, Any]:
+def run_stage0_stage1(
+    config_path: str | Path,
+    *,
+    path_overrides: dict[str, str] | None = None,
+) -> dict[str, Any]:
     """Build manifests and run the leakage audit."""
-    cfg = load_config(config_path)
+    cfg = load_config(config_path, path_overrides=path_overrides)
     ensure_dirs(cfg)
 
     processed = Path(cfg["paths"]["processed_dir"])
