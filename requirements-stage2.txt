@@ -1,0 +1,6 @@
+# Install after requirements.txt using Python 3.10–3.12.
+# Frozen CLIP encoding + HNSW retrieval only; no decoder/training dependencies.
+torch>=2.4
+torchvision>=0.19
+open_clip_torch>=2.26
+hnswlib>=0.8

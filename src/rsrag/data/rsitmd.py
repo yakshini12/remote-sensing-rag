@@ -79,7 +79,9 @@ def _load_annotation_map(path: Path) -> dict[str, dict[str, Any]]:
         stem = Path(name).stem
         clean = [c.strip() for c in captions if str(c).strip()]
         payload = {"captions": clean, "class_name": class_name or ""}
-        for k in (name, stem, key):
+        # filename and key are commonly the same value. Register each alias
+        # once, but preserve repeated caption annotations from the dataset.
+        for k in dict.fromkeys((name, stem, key)):
             if k not in mapping:
                 mapping[k] = {"captions": [], "class_name": ""}
             mapping[k]["captions"].extend(clean)
@@ -193,9 +195,9 @@ def load_rsitmd(cfg: dict[str, Any]) -> list[dict[str, Any]]:
             "captions": [],
             "class_name": "",
         }
-        captions = _dedupe_preserve(
-            [c.strip() for c in meta_ann.get("captions", []) if str(c).strip()]
-        )
+        captions = [
+            c.strip() for c in meta_ann.get("captions", []) if str(c).strip()
+        ]
 
         meta = inspect_image(
             path,

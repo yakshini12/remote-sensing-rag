@@ -49,6 +49,7 @@ def load_official_ucm_splits(ucm_root: Path) -> dict[str, str] | None:
 
     Supported:
     - splits.json  {"train": [...], "val": [...], "test": [...]}
+    - dataset.json (RSICD/UCM style) images[].split + images[].filename
     - train.txt / val.txt / test.txt containing image ids or filenames
     """
     splits_json = ucm_root / "splits.json"
@@ -59,6 +60,24 @@ def load_official_ucm_splits(ucm_root: Path) -> dict[str, str] | None:
             for item in data.get(split_name, []):
                 mapping[_normalize_id(str(item))] = split_name
         return mapping or None
+
+    dataset_json = ucm_root / "dataset.json"
+    if dataset_json.is_file():
+        data = json.loads(dataset_json.read_text(encoding="utf-8"))
+        images = data.get("images") if isinstance(data, dict) else None
+        if isinstance(images, list):
+            mapping: dict[str, str] = {}
+            for item in images:
+                if not isinstance(item, dict):
+                    continue
+                split_name = str(item.get("split") or "").lower()
+                fname = item.get("filename") or item.get("file_name") or item.get("filepath")
+                if split_name in {"train", "val", "test", "restval"} and fname:
+                    if split_name == "restval":
+                        split_name = "val"
+                    mapping[_normalize_id(str(fname))] = split_name
+            if mapping:
+                return mapping
 
     mapping = {}
     found = False

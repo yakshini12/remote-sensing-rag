@@ -72,9 +72,10 @@ def _load_json_captions(path: Path) -> dict[str, list[str]]:
         clean = [c.strip() for c in captions if str(c).strip()]
         if not clean:
             return
-        mapping[name].extend(clean)
-        mapping[stem].extend(clean)
-        mapping[key].extend(clean)
+        # filename and key are often identical. Add each alias once while
+        # preserving repeated annotation slots from the source dataset.
+        for alias in dict.fromkeys((name, stem, key)):
+            mapping[alias].extend(clean)
 
     if isinstance(data, list):
         for item in data:
@@ -181,7 +182,7 @@ def load_ucm_captions(cfg: dict[str, Any]) -> list[dict[str, Any]]:
             or caption_map.get(rel)
             or []
         )
-        captions = _dedupe_preserve([c.strip() for c in captions if str(c).strip()])
+        captions = [c.strip() for c in captions if str(c).strip()]
 
         if not captions:
             for side in (path.with_suffix(".txt"), root / "captions" / f"{stem}.txt"):

@@ -23,6 +23,11 @@ data/processed/**
 reports/**
 !reports/.gitkeep
 
+# Stage 2 embeddings, indexes, retrieval rows, and self-contained HTML
+artifacts/**
+!artifacts/.gitkeep
+!artifacts/README.md
+
 # Notebook / IDE
 .ipynb_checkpoints/
 .DS_Store

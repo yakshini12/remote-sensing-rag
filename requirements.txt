@@ -1,4 +1,4 @@
-# Stage 0–1 only: dataset manifests + leakage audit.
+# Core dependencies for Stages 0–2; model dependencies are separate.
 # Pins are flexible enough for Python 3.10–3.14 and Colab.
 # After creating a venv: pip install -r requirements.txt && pip install -e .
 

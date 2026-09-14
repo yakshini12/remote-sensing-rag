@@ -1,11 +1,13 @@
-# Remote Sensing RAG — Stage 0 & Stage 1
+# Remote Sensing RAG — Stages 0–2
 
 Deterministic **dataset manifests + leakage audit** for:
 
 - **UCM-Captions** → caption train/val/test images
 - **RSITMD** → external textual knowledge base
 
-This repository stage does **not** implement CLIP, GPT-2, RAG decoding, or the five research extensions.
+Stage 2 adds **retrieval only**: frozen CLIP embeddings, an exact UCM→RSITMD
+search reference, and an HNSW comparison. It does not implement GPT-2, RAG
+decoding, caption training/generation, PCA, or the five research extensions.
 
 **Portable by design:** code lives on GitHub. Real datasets live on Google Drive (or another disk you control). Committed configs use relative paths only. Override with environment variables or CLI flags. See [docs/PORTABILITY.md](docs/PORTABILITY.md).
 
@@ -88,13 +90,29 @@ See `data/raw/README.md` for Drive folder layout and download links.
 
 ## Google Colab
 
-Open `notebooks/stage0_stage1_colab.ipynb`. Clone this repo, mount Drive, set the env vars above. Do **not** commit datasets.
+Open `notebooks/stage0_stage1_colab.ipynb`. It now covers the real Stage 1
+audit followed by the approved Stage 2 retrieval-only run, with large artifacts
+written to Drive. Do **not** commit datasets or generated embeddings.
+
+## Stage 2 retrieval-only
+
+After the real Stage 1 audit passes, install `requirements-stage2.txt` and run:
+
+```bash
+python scripts/run_stage2_retrieval.py --config configs/stage2_retrieval.yaml
+```
+
+The R0 checkpoint is explicitly recorded as OpenCLIP `ViT-B-32-quickgelu` /
+`laion400m_e32`, our reproducible interpretation of the paper's under-specified
+"CLIP-ViT-B/32 pretrained on LAION-400M." Generated embeddings and indexes are
+ignored by Git. See [docs/STAGE2_RETRIEVAL.md](docs/STAGE2_RETRIEVAL.md).
 
 ## What is intentionally missing
 
-- CLIP embeddings
-- FAISS/HNSW retrieval
 - GPT-2 captioning
+- RAG decoder integration
+- caption training or generation
+- PCA and diversity reranking
 - Bitemp / SAR / Graph / HalluGuard / PEFT extensions
 
-Those start only after Stage 0–1 manifests and leakage findings are accepted on **real** UCM + RSITMD.
+Those remain outside Stage 2.
