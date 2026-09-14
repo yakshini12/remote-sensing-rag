@@ -1,0 +1,47 @@
+# Fixture config for Stage 0–1 unit/smoke tests.
+# Uses tiny synthetic data under tests/fixtures/.
+
+project_name: remote-sensing-rag-fixtures
+stage: stage0_stage1
+seed: 42
+schema_version: "1.0.0"
+
+paths:
+  project_root: .
+  ucm_root: tests/fixtures/ucm_captions
+  rsitmd_root: tests/fixtures/rsitmd
+  processed_dir: data/processed/fixtures
+  report_dir: reports/fixtures
+
+hashing:
+  chunk_size_bytes: 1048576
+  exact_hash_algo: sha256
+  perceptual_hash: difference_hash
+  perceptual_hash_size: 8
+
+splits:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  prefer_official_split_files: true
+
+smoke:
+  num_samples_per_source: 4
+  write_html_preview: true
+
+leakage:
+  perceptual_hamming_threshold: 5
+  caption_exact_match: true
+  caption_normalized_match: true
+  # Keep false for demo runs so leakage is reported without failing the process.
+  fail_on_hard_image_leakage: false
+  fail_on_caption_overlap: false
+
+loaders:
+  ucm_caption_candidates:
+    - dataset.json
+    - captions.json
+  rsitmd_annotation_candidates:
+    - dataset_RSITMD.json
+    - dataset.json
+  image_extensions: [".jpg", ".jpeg", ".png"]

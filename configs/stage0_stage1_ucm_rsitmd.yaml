@@ -1,0 +1,59 @@
+# Stage 0 + Stage 1 configuration
+# --------------------------------
+# Purpose: deterministic manifests + leakage audit for
+# UCM-Captions (caption dataset) + RSITMD (knowledge-base captions).
+#
+# Design decision:
+# - Paths are relative to the project root unless absolute.
+# - Seeds / hash algorithms are fixed for reproducibility.
+
+project_name: remote-sensing-rag
+stage: stage0_stage1
+seed: 42
+schema_version: "1.0.0"
+
+paths:
+  project_root: .
+  ucm_root: data/raw/ucm_captions
+  rsitmd_root: data/raw/rsitmd
+  processed_dir: data/processed
+  report_dir: reports
+
+hashing:
+  chunk_size_bytes: 1048576
+  exact_hash_algo: sha256
+  perceptual_hash: difference_hash
+  perceptual_hash_size: 8
+
+splits:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  prefer_official_split_files: true
+
+smoke:
+  num_samples_per_source: 8
+  write_html_preview: true
+
+leakage:
+  perceptual_hamming_threshold: 5
+  caption_exact_match: true
+  caption_normalized_match: true
+  # Default false so discovering leakage is reported, not treated as a crash.
+  # Set true in CI once you have cleaned manifests.
+  fail_on_hard_image_leakage: false
+  fail_on_caption_overlap: false
+
+loaders:
+  ucm_caption_candidates:
+    - dataset.json
+    - captions.json
+    - ucm_captions.json
+    - dataset_ucm.json
+    - dataset_UCM.json
+  rsitmd_annotation_candidates:
+    - dataset_RSITMD.json
+    - dataset_rsitmd.json
+    - rsitmd.json
+    - dataset.json
+  image_extensions: [".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp"]

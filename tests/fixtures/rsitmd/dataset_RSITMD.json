@@ -1,0 +1,40 @@
+{
+  "images": [
+    {
+      "filename": "kb_hard.jpg",
+      "filepath": "images/kb_hard.jpg",
+      "captions": [
+        "shared harbor scene with ships",
+        "boats docked at a harbor"
+      ]
+    },
+    {
+      "filename": "kb_001.jpg",
+      "filepath": "images/kb_001.jpg",
+      "captions": [
+        "dense residential buildings with roads"
+      ]
+    },
+    {
+      "filename": "kb_002.jpg",
+      "filepath": "images/kb_002.jpg",
+      "captions": [
+        "a river flowing through forest"
+      ]
+    },
+    {
+      "filename": "kb_beach_near.jpg",
+      "filepath": "images/kb_beach_near.jpg",
+      "captions": [
+        "coastal beach with waves nearby"
+      ]
+    },
+    {
+      "filename": "kb_airport_text.jpg",
+      "filepath": "images/kb_airport_text.jpg",
+      "captions": [
+        "an airport runway with airplanes"
+      ]
+    }
+  ]
+}

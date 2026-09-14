@@ -1,0 +1,35 @@
+{
+  "images": [
+    {
+      "filename": "ag_001.jpg",
+      "filepath": "agricultural/ag_001.jpg",
+      "captions": [
+        "green farmland with rectangular fields",
+        "crop fields arranged in a grid"
+      ]
+    },
+    {
+      "filename": "ap_001.jpg",
+      "filepath": "airport/ap_001.jpg",
+      "captions": [
+        "an airport runway with airplanes",
+        "gray runway surrounded by buildings"
+      ]
+    },
+    {
+      "filename": "be_001.jpg",
+      "filepath": "beach/be_001.jpg",
+      "captions": [
+        "a sandy beach next to blue water",
+        "coastal beach with waves"
+      ]
+    },
+    {
+      "filename": "hard_001.jpg",
+      "filepath": "leak_hard/hard_001.jpg",
+      "captions": [
+        "shared harbor scene with ships"
+      ]
+    }
+  ]
+}

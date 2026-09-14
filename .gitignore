@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.pytest_cache/
+
+# Data and large artifacts (keep manifests/reports tracked selectively)
+data/raw/**
+!data/raw/.gitkeep
+!data/raw/README.md
+data/processed/**
+!data/processed/.gitkeep
+!data/processed/README.md
+
+# Reports may be regenerated; keep directory
+reports/**
+!reports/.gitkeep
+
+# Notebook / IDE
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/
+
+# Experiment caches
+experiments/**
+!experiments/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.faiss
+*.index

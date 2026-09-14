@@ -1,0 +1,11 @@
+# Stage 0–1 only: dataset manifests + leakage audit.
+# Pins are flexible enough for Python 3.10–3.14 and Colab.
+# After creating a venv: pip install -r requirements.txt && pip install -e .
+
+numpy>=1.26
+pandas>=2.0
+Pillow>=10.0
+PyYAML>=6.0
+tqdm>=4.66
+ImageHash>=4.3
+pytest>=7.0
